@@ -1,0 +1,112 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    background: url('food.jpg') no-repeat center center fixed; 
+    background-size: cover;
+  }
+  
+  .overlay { 
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  
+  .title-container {
+    width: 100%;
+    text-align: center;
+    position: absolute;
+    top: 0;
+    z-index: 2;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 10px 0;
+  }
+  
+  .title {
+    font-size: 1.9em;
+    color: #ffffff;
+    font-weight: 700;
+    margin: 0;
+  }
+  
+  .quote {
+    font-size: 1.5rem;
+    color: #ffffff;
+    font-style: italic;
+    margin-top: 10px;
+  }
+  
+  .container {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 350px;
+    margin-top: 120px;
+    width: 1000px;
+    flex-direction: column;
+  }
+  
+  .search-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    background-color: rgba(24, 0, 0, 0.405);
+    max-width: 100%;
+    height: 400px;
+    width: 80%;
+    text-align: center;
+  }
+  
+  .search-container h2 {
+    font-weight: 600;
+    font-size: 2.5rem;
+    font-style: italic;
+    margin-bottom: 50px;
+    color: #ffffff;
+  }
+  
+  .search-container p {
+    color: #6c757d;
+    margin-bottom: 20px;
+  }
+  
+  .search-container input[type="text"] {
+    width: 100%;
+    height: 50px;
+    font-size: 20px;
+    max-width: 600px;
+    margin-bottom: 25px;
+    padding: 10px;
+    border: 2px solid #ff6f61;
+    border-radius: 20px;
+  }
+  
+  .search-container button {
+    width: 100%;
+    height: 50px;
+    font-size: 1.5rem;
+    max-width: 200px;
+    margin-bottom: 20px;
+    background-color: #ff6f61;
+    border: none;
+    color: #200404;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .search-container button:hover {
+    background-color: #e55b50;
+  }
+  

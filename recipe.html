@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Recipe Details</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="recipe.css" />
+</head>
+<body>
+  <div class="scaled-content">
+    <div class="container mt-5" id="recipe-container">
+      <!-- Recipe details will be dynamically inserted here -->
+    </div>
+  </div>
+  <!-- Back button -->
+  <button class="btn btn-secondary back-button" id="back-btn">Back</button>
+  <!-- Script -->
+  <script src="recipe.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      let recipeContainer = document.getElementById("recipe-container");
+      let backButton = document.getElementById('back-btn');
+
+      // Retrieve selected meal from localStorage
+      let meal = JSON.parse(localStorage.getItem("selectedMeal"));
+
+      if (meal) {
+        fetch(`https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=hi&dt=t&q=${encodeURIComponent(meal.strInstructions)}`)
+          .then(response => response.json())
+          .then(data => {
+            let instructionsInHindi = data[0].map(item => item[0]).join('');
+            
+            // Extract ingredients and measures
+            let ingredients = [];
+            for (let i = 1; i <= 20; i++) {
+              let ingredient = meal[`strIngredient${i}`];
+              let measure = meal[`strMeasure${i}`];
+              if (ingredient) {
+                ingredients.push(`${measure} ${ingredient}`);
+              }
+            }
+
+            recipeContainer.innerHTML = `
+              <div class="row">
+                <div class="col-md-4">
+                  <img src="${meal.strMealThumb}" class="img-fluid" alt="${meal.strMeal}">
+                  <div>
+                    <button class="btn btn-info mt-3" id="ingredients-btn">Show Ingredients</button>
+                    <button class="btn btn-info mt-3 d-none" id="hide-ingredients-btn">Hide Ingredients</button>
+                    <div class="ingredients-list d-none">
+                      ${ingredients.map(ing => `
+                        <div class="ingredients-list-item">${ing}</div>
+                      `).join('')}
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-8">
+                  <h2>${meal.strMeal}</h2>
+                  <p><strong>Area:</strong> ${meal.strArea}</p>
+                  <div class="instructions-container">
+                    <pre class="instructions text-left">${meal.strInstructions}</pre>
+                    <pre class="instructions-hindi text-left d-none">${instructionsInHindi}</pre>
+                    <div>
+                      <button class="btn btn-info mt-3" id="hindi-btn">Show in Hindi</button>
+                      <button class="btn btn-info mt-3 d-none" id="english-btn">Show in English</button>
+                      <a href="${meal.strYoutube}" target="_blank" class="btn btn-primary mt-3">Watch on YouTube</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            `;
+
+            // Add event listener to the Ingredients button
+            document.getElementById('ingredients-btn').addEventListener('click', function() {
+              document.querySelector('.ingredients-list').classList.remove('d-none');
+              document.getElementById('ingredients-btn').classList.add('d-none');
+              document.getElementById('hide-ingredients-btn').classList.remove('d-none');
+            });
+
+            // Add event listener to the Hide Ingredients button
+            document.getElementById('hide-ingredients-btn').addEventListener('click', function() {
+              document.querySelector('.ingredients-list').classList.add('d-none');
+              document.getElementById('hide-ingredients-btn').classList.add('d-none');
+              document.getElementById('ingredients-btn').classList.remove('d-none');
+            });
+
+            // Add event listener to the Hindi button
+            document.getElementById('hindi-btn').addEventListener('click', function() {
+              document.querySelector('.instructions').classList.toggle('d-none');
+              document.querySelector('.instructions-hindi').classList.toggle('d-none');
+              document.getElementById('hindi-btn').classList.add('d-none');
+              document.getElementById('english-btn').classList.remove('d-none');
+            });
+
+            // Add event listener to the English button
+            document.getElementById('english-btn').addEventListener('click', function() {
+              document.querySelector('.instructions-hindi').classList.toggle('d-none');
+              document.querySelector('.instructions').classList.toggle('d-none');
+              document.getElementById('english-btn').classList.add('d-none');
+              document.getElementById('hindi-btn').classList.remove('d-none');
+            });
+          });
+      } else {
+        recipeContainer.innerHTML = "<h3>No recipe details found</h3>";
+      }
+
+      // Add event listener to the "Back to Recipes" button
+      backButton.addEventListener('click', function() {
+        let currentURL = new URL(window.location.href);
+        let searchQuery = currentURL.searchParams.get('search');
+        if (searchQuery) {
+          window.location.href = `index.html?search=${encodeURIComponent(searchQuery)}`;
+        } else {
+          window.location.href = 'index.html'; // Default redirect to main search page
+        }
+      });
+    });
+  </script>
+</body>
+</html>

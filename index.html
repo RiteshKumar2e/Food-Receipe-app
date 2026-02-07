@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Food & Recipe API</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="index.css">
+</head>
+<body>
+  <div class="overlay"></div>
+  <div class="title-container">
+    <div class="title">Food & Recipe</div>
+    <div class="quote">Embracing the symphony of tastes on your plate.</div>
+  </div>
+  <div class="container">
+    <div class="search-container">
+      <h2>A Good meal leads to Good mood</h2>
+      <input type="text" placeholder="Type A Dish Name Here.." id="user-inp" class="form-control">
+      <button id="search-btn" class="btn btn-primary">Search</button>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS and Custom Script -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      let searchBtn = document.getElementById("search-btn");
+
+      searchBtn.addEventListener("click", () => {
+        let userInp = document.getElementById("user-inp").value.trim();
+        if (userInp.length === 0) {
+          alert("Input Field Cannot Be Empty");
+        } else {
+          window.location.href = `searchResults.html?search=${encodeURIComponent(userInp)}`;
+        }
+      });
+    });
+  </script>
+</body>
+</html>

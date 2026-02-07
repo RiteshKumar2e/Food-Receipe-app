@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Search Results</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="searchResults.css">
+</head>
+<body>
+  <div class="content-wrapper">
+    <!-- Back to Search button -->
+    <a href="index.html" class="btn btn-secondary back-to-search">Back to Search</a>
+
+    <div class="container mt-5">
+      <div class="row" id="result">
+        <!-- Meal items will be dynamically inserted here -->
+      </div>
+      <div class="button-group">
+        <button id="read-more" class="btn btn-primary">Read More</button>
+        <button id="BACK" class="btn btn-danger">BACK</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS and Custom Script -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      let result = document.getElementById("result");
+      let readMoreBtn = document.getElementById("read-more");
+      let readLessBtn = document.getElementById("BACK");
+      let url = "https://www.themealdb.com/api/json/v1/1/search.php?s=";
+      let params = new URLSearchParams(window.location.search);
+      let searchQuery = params.get('search');
+      let allMeals = [];
+      let displayedMealsCount = 0;
+      const mealsToShow = 3;
+
+      if (searchQuery) {
+        fetch(url + searchQuery)
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error('Network response was not ok');
+            }
+            return response.json();
+          })
+          .then((data) => {
+            if (data.meals) {
+              allMeals = data.meals;
+              displayMeals();
+              toggleButtonsVisibility();
+            } else {
+              result.innerHTML = `<div class="col"><h3>No results found</h3></div>`;
+              toggleButtonsVisibility();
+            }
+          })
+          .catch((error) => {
+            console.error('Error fetching data:', error);
+            result.innerHTML = `<div class="col"><h3>Failed to fetch data. Please try again later.</h3></div>`;
+            toggleButtonsVisibility();
+          });
+      } else {
+        result.innerHTML = `<div class="col"><h3>No search query provided</h3></div>`;
+        toggleButtonsVisibility();
+      }
+
+      function displayMeals() {
+        result.innerHTML = "";
+        let mealsToDisplay = allMeals.slice(displayedMealsCount, displayedMealsCount + mealsToShow);
+        mealsToDisplay.forEach((myMeal, index) => {
+          let mealCard = document.createElement("div");
+          mealCard.classList.add("meal-card");
+
+          mealCard.innerHTML = `
+            <div class="card">
+              <img src="${myMeal.strMealThumb}" class="card-img-top" alt="${myMeal.strMeal}">
+              <div class="card-body">
+                <h5 class="card-title">${myMeal.strMeal}</h5>
+                <p class="card-text"><small class="text-muted">${myMeal.strArea}</small></p>
+                <button class="btn btn-success show-recipe mb-2" data-meal='${JSON.stringify(myMeal)}'>View Recipe</button>
+              </div>
+            </div>
+          `;
+
+          result.appendChild(mealCard);
+
+          let showRecipeBtn = mealCard.querySelector('.show-recipe');
+
+          showRecipeBtn.addEventListener('click', function() {
+            let selectedMeal = JSON.parse(this.getAttribute('data-meal'));
+            localStorage.setItem('selectedMeal', JSON.stringify(selectedMeal));
+            window.location.href = 'recipe.html';
+          });
+        });
+
+        toggleButtonsVisibility();
+      }
+
+      function toggleButtonsVisibility() {
+        if (displayedMealsCount === 0) {
+          readLessBtn.style.display = 'none';
+          readMoreBtn.style.display = allMeals.length > mealsToShow ? 'block' : 'none';
+        } else if (displayedMealsCount >= allMeals.length) {
+          readMoreBtn.style.display = 'none';
+          readLessBtn.style.display = 'block';
+        } else {
+          readMoreBtn.style.display = 'block';
+          readLessBtn.style.display = 'block';
+        }
+      }
+
+      readMoreBtn.addEventListener('click', () => {
+        displayedMealsCount += mealsToShow;
+        displayMeals();
+      });
+
+      readLessBtn.addEventListener('click', () => {
+        displayedMealsCount -= mealsToShow;
+        if (displayedMealsCount < 0) {
+          displayedMealsCount = 0;
+        }
+        displayMeals();
+      });
+
+    });
+  </script>
+</body>
+</html>

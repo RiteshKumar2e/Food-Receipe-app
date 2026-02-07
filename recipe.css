@@ -1,0 +1,59 @@
+.back-button {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1000; /* Ensure it's above other content */
+  }
+  
+  body, html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    background-size: cover;
+  }
+  
+  .instructions-container {
+    background: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 20px;
+  }
+  
+  .instructions, .instructions-hindi {
+    white-space: pre-wrap; /* Ensure preformatted text wraps correctly */
+    font-style: oblique, bold;
+    font-weight: bolder;
+    font-size: 1.2rem; /* Adjusted font-size */
+    line-height: 1.4;
+  }
+  
+  .ingredients-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 0;
+    margin-top: 15px;
+    font-weight: bolder;
+    font-size: 1.1rem; /* Adjusted font-size */
+  }
+  
+  .ingredients-list-item {
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    padding: 5px 10px;
+    border-radius: 5px;
+  }
+  
+  .img-fluid {
+    max-width: 90%;
+    height: auto;
+  }
+  
+  .scaled-content {
+    margin-left: 180px;
+    margin-top: 50px;
+    transform: scale(0.7);
+    transform-origin: top left;
+  }
+  

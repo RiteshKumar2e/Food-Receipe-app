@@ -1,0 +1,55 @@
+body, html {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  background: url('image2.jpg') no-repeat center center fixed; 
+  background-size: cover;
+}
+
+.content-wrapper {
+  width: 100%;
+}
+
+.back-to-search {
+  position: relative;
+  top: 30px;
+  left: 5px;
+  z-index: 1000;
+}
+
+.container {
+  max-width: 100%;
+  max-height: 90%;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 60px; /* Increased gap between grid items */
+}
+
+.meal-card {
+  margin-left: 200px;
+  margin-bottom: 10px;
+}
+
+.card {
+  width: 250px;
+  position: relative; /* Add relative positioning to the card */
+}
+
+.card-img-top {
+  max-height: 150px;
+  object-fit: cover;
+}
+
+.button-group {
+  position: absolute; /* Add absolute positioning to the button group */
+  bottom: 10px; /* Adjust the bottom margin as needed */
+  right: 10px; /* Adjust the right margin as needed */
+}
+
+.button-group .btn-primary {
+  margin: -10px 0 20px 0; 
+}
