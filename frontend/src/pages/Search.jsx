@@ -7,6 +7,7 @@ import '../styles/Search.css';
 const SearchResults = () => {
     const [searchParams] = useSearchParams();
     const query = searchParams.get('q') || '';
+    const area = searchParams.get('area') || '';
     const navigate = useNavigate();
 
     const [recipes, setRecipes] = useState([]);
@@ -16,7 +17,13 @@ const SearchResults = () => {
         const fetchRecipes = async () => {
             setLoading(true);
             try {
-                const response = await fetch(`http://localhost:5000/api/recipes?query=${query}`);
+                let url = '';
+                if (area) {
+                    url = `http://localhost:5000/api/recipes/country?area=${area}`;
+                } else {
+                    url = `http://localhost:5000/api/recipes?query=${query}`;
+                }
+                const response = await fetch(url);
                 const data = await response.json();
                 setRecipes(data.meals || []);
             } catch (error) {
@@ -27,13 +34,17 @@ const SearchResults = () => {
         };
 
         fetchRecipes();
-    }, [query]);
+    }, [query, area]);
 
     return (
         <div className="page-content">
             <div className="search-header">
                 <div className="search-meta">
-                    <h1>{query ? `Results for "${query}"` : 'Explore Recipes'}</h1>
+                    <h1>
+                        {area
+                            ? `${area} Cuisine`
+                            : (query ? `Results for "${query}"` : 'Explore Recipes')}
+                    </h1>
                     <p>{recipes.length} delicious recipes found</p>
                 </div>
 
@@ -67,12 +78,12 @@ const SearchResults = () => {
                         >
                             <div className="recipe-image-wrapper">
                                 <img src={recipe.strMealThumb} alt={recipe.strMeal} className="recipe-image" />
-                                <div className="recipe-badge">{recipe.strCategory}</div>
+                                {recipe.strCategory && <div className="recipe-badge">{recipe.strCategory}</div>}
                             </div>
                             <div className="recipe-content">
                                 <h3 className="recipe-title">{recipe.strMeal}</h3>
                                 <div className="recipe-meta">
-                                    <span>{recipe.strArea}</span>
+                                    <span>{recipe.strArea || area}</span>
                                     <span style={{ color: 'var(--primary)', fontWeight: '600' }}>View Details</span>
                                 </div>
                             </div>
@@ -83,7 +94,7 @@ const SearchResults = () => {
 
             {(!loading && recipes.length === 0) && (
                 <div className="no-results">
-                    <h3>No recipes found for "{query}"</h3>
+                    <h3>No recipes found</h3>
                     <p>Try different keywords or browse our categories.</p>
                 </div>
             )}

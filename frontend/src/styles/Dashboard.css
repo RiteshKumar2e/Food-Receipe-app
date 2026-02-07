@@ -1,0 +1,144 @@
+.dashboard-page {
+    padding-top: var(--nav-height);
+    min-height: 100vh;
+    background: var(--bg-main);
+}
+
+.dashboard-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+}
+
+.dashboard-header {
+    margin-bottom: 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.welcome-msg h1 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: var(--text-main);
+    margin-bottom: 0.5rem;
+}
+
+.welcome-msg p {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+}
+
+.search-widget {
+    background: white;
+    padding: 2.5rem;
+    border-radius: 2rem;
+    box-shadow: var(--shadow-md);
+    margin-bottom: 4rem;
+    border: 1px solid var(--glass-border);
+}
+
+.search-widget h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    color: var(--text-main);
+}
+
+.dashboard-search-form {
+    display: flex;
+    gap: 1rem;
+}
+
+.dashboard-search-form input {
+    flex: 1;
+    padding: 1rem 1.5rem;
+    border-radius: 1rem;
+    border: 1px solid var(--glass-border);
+    background: var(--bg-main);
+    font-size: 1.1rem;
+}
+
+.dashboard-search-form button {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 0 2.5rem;
+    border-radius: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.dashboard-search-form button:hover {
+    background: var(--primary-hover);
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 3rem;
+}
+
+.recent-searches {
+    background: white;
+    padding: 2rem;
+    border-radius: 2rem;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--glass-border);
+}
+
+.profile-card-mini {
+    background: white;
+    padding: 2rem;
+    border-radius: 2rem;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--glass-border);
+    text-align: center;
+}
+
+.pfp-placeholder {
+    width: 100px;
+    height: 100px;
+    background: var(--bg-main);
+    border-radius: 50%;
+    margin: 0 auto 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary);
+    font-size: 2.5rem;
+    font-weight: 800;
+}
+
+.profile-details-mini h4 {
+    font-size: 1.3rem;
+    margin-bottom: 0.3rem;
+}
+
+.profile-details-mini p {
+    color: var(--text-muted);
+    margin-bottom: 1.5rem;
+}
+
+.view-profile-btn {
+    display: block;
+    width: 100%;
+    padding: 0.8rem;
+    background: var(--bg-main);
+    color: var(--text-main);
+    border-radius: 0.75rem;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.view-profile-btn:hover {
+    background: var(--primary);
+    color: white;
+}
+
+@media (max-width: 992px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+}
