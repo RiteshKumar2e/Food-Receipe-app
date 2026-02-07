@@ -4,115 +4,115 @@ import { motion } from 'framer-motion';
 import { ChevronLeft, Clock, Users, PlayCircle, Globe, ListChecks } from 'lucide-react';
 
 const RecipeDetail = () => {
-    const { id } = useParams();
-    const navigate = useNavigate();
-    const [recipe, setRecipe] = useState(null);
-    const [loading, setLoading] = useState(true);
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const [recipe, setRecipe] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
-        const fetchRecipe = async () => {
-            setLoading(true);
-            try {
-                const response = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`);
-                const data = await response.json();
-                setRecipe(data.meals ? data.meals[0] : null);
-            } catch (error) {
-                console.error("Error fetching recipe:", error);
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        fetchRecipe();
-        window.scrollTo(0, 0);
-    }, [id]);
-
-    const getIngredients = (meal) => {
-        let ingredients = [];
-        for (let i = 1; i <= 20; i++) {
-            const ingredient = meal[`strIngredient${i}`];
-            const measure = meal[`strMeasure${i}`];
-            if (ingredient && ingredient.trim()) {
-                ingredients.push({ name: ingredient, measure: measure });
-            }
-        }
-        return ingredients;
+  useEffect(() => {
+    const fetchRecipe = async () => {
+      setLoading(true);
+      try {
+        const response = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`);
+        const data = await response.json();
+        setRecipe(data.meals ? data.meals[0] : null);
+      } catch (error) {
+        console.error("Error fetching recipe:", error);
+      } finally {
+        setLoading(false);
+      }
     };
 
-    if (loading) return <div className="loader">Loading...</div>;
-    if (!recipe) return <div className="error">Recipe not found</div>;
+    fetchRecipe();
+    window.scrollTo(0, 0);
+  }, [id]);
 
-    return (
-        <div className="page-content">
-            <motion.button
-                className="back-btn"
-                onClick={() => navigate(-1)}
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-            >
-                <ChevronLeft size={20} />
-                Back to search
-            </motion.button>
+  const getIngredients = (meal) => {
+    let ingredients = [];
+    for (let i = 1; i <= 20; i++) {
+      const ingredient = meal[`strIngredient${i}`];
+      const measure = meal[`strMeasure${i}`];
+      if (ingredient && ingredient.trim()) {
+        ingredients.push({ name: ingredient, measure: measure });
+      }
+    }
+    return ingredients;
+  };
 
-            <div className="recipe-detail-grid">
-                <motion.div
-                    className="recipe-visuals"
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.5 }}
-                >
-                    <img src={recipe.strMealThumb} alt={recipe.strMeal} className="main-image" />
-                    <div className="quick-info">
-                        <div className="info-item">
-                            <Globe size={20} />
-                            <span>{recipe.strArea}</span>
-                        </div>
-                        <div className="info-item">
-                            <ListChecks size={20} />
-                            <span>{recipe.strCategory}</span>
-                        </div>
-                        {recipe.strYoutube && (
-                            <a href={recipe.strYoutube} target="_blank" rel="noreferrer" className="info-item youtube">
-                                <PlayCircle size={20} />
-                                <span>Video Tutorial</span>
-                            </a>
-                        )}
-                    </div>
-                </motion.div>
+  if (loading) return <div className="loader">Loading...</div>;
+  if (!recipe) return <div className="error">Recipe not found</div>;
 
-                <motion.div
-                    className="recipe-info-content"
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.5, delay: 0.2 }}
-                >
-                    <h1 className="recipe-title-main">{recipe.strMeal}</h1>
-                    <p className="tags">{recipe.strTags?.split(',').join(' • ')}</p>
+  return (
+    <div className="page-content">
+      <motion.button
+        className="back-btn"
+        onClick={() => navigate(-1)}
+        initial={{ opacity: 0, x: -20 }}
+        animate={{ opacity: 1, x: 0 }}
+      >
+        <ChevronLeft size={20} />
+        Back to search
+      </motion.button>
 
-                    <div className="ingredients-section">
-                        <h3>Ingredients</h3>
-                        <div className="ingredients-list">
-                            {getIngredients(recipe).map((ing, i) => (
-                                <div key={i} className="ingredient-item">
-                                    <span className="ing-measure">{ing.measure}</span>
-                                    <span className="ing-name">{ing.name}</span>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-
-                    <div className="instructions-section">
-                        <h3>Instructions</h3>
-                        <div className="instructions-text">
-                            {recipe.strInstructions.split('\r\n').map((step, i) => (
-                                step.trim() && <p key={i}>{step}</p>
-                            ))}
-                        </div>
-                    </div>
-                </motion.div>
+      <div className="recipe-detail-grid">
+        <motion.div
+          className="recipe-visuals"
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5 }}
+        >
+          <img src={recipe.strMealThumb} alt={recipe.strMeal} className="main-image" />
+          <div className="quick-info">
+            <div className="info-item">
+              <Globe size={20} />
+              <span>{recipe.strArea}</span>
             </div>
+            <div className="info-item">
+              <ListChecks size={20} />
+              <span>{recipe.strCategory}</span>
+            </div>
+            {recipe.strYoutube && (
+              <a href={recipe.strYoutube} target="_blank" rel="noreferrer" className="info-item youtube">
+                <PlayCircle size={20} />
+                <span>Video Tutorial</span>
+              </a>
+            )}
+          </div>
+        </motion.div>
 
-            <style jsx>{`
+        <motion.div
+          className="recipe-info-content"
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+        >
+          <h1 className="recipe-title-main">{recipe.strMeal}</h1>
+          <p className="tags">{recipe.strTags?.split(',').join(' • ')}</p>
+
+          <div className="ingredients-section">
+            <h3>Ingredients</h3>
+            <div className="ingredients-list">
+              {getIngredients(recipe).map((ing, i) => (
+                <div key={i} className="ingredient-item">
+                  <span className="ing-measure">{ing.measure}</span>
+                  <span className="ing-name">{ing.name}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="instructions-section">
+            <h3>Instructions</h3>
+            <div className="instructions-text">
+              {recipe.strInstructions.split('\r\n').map((step, i) => (
+                step.trim() && <p key={i}>{step}</p>
+              ))}
+            </div>
+          </div>
+        </motion.div>
+      </div>
+
+      <style jsx>{`
         .back-btn {
           background: transparent;
           border: none;
@@ -141,7 +141,7 @@ const RecipeDetail = () => {
         .main-image {
           width: 100%;
           border-radius: 2rem;
-          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+          box-shadow: var(--shadow-md);
           margin-bottom: 2rem;
         }
 
@@ -152,7 +152,7 @@ const RecipeDetail = () => {
         }
 
         .info-item {
-          background: var(--bg-card);
+          background: white;
           padding: 0.75rem 1.5rem;
           border-radius: 1rem;
           display: flex;
@@ -160,6 +160,7 @@ const RecipeDetail = () => {
           gap: 0.75rem;
           font-size: 0.9rem;
           border: 1px solid var(--glass-border);
+          box-shadow: var(--shadow-sm);
         }
 
         .info-item.youtube {
@@ -200,11 +201,13 @@ const RecipeDetail = () => {
 
         .ingredient-item {
           padding: 1rem;
-          background: rgba(255, 255, 255, 0.03);
+          background: white;
+          border: 1px solid var(--glass-border);
           border-radius: 0.75rem;
           display: flex;
           gap: 0.5rem;
           font-size: 0.95rem;
+          box-shadow: var(--shadow-sm);
         }
 
         .ing-measure {
@@ -225,8 +228,8 @@ const RecipeDetail = () => {
           }
         }
       `}</style>
-        </div>
-    );
+    </div>
+  );
 };
 
 export default RecipeDetail;

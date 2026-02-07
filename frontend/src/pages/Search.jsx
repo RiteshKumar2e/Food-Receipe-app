@@ -111,9 +111,9 @@ const SearchResults = () => {
         }
 
         .action-btn {
-          background: rgba(255, 255, 255, 0.05);
+          background: white;
           border: 1px solid var(--glass-border);
-          color: white;
+          color: var(--text-main);
           padding: 0.75rem 1.5rem;
           border-radius: 12px;
           display: flex;
@@ -121,10 +121,13 @@ const SearchResults = () => {
           gap: 0.5rem;
           cursor: pointer;
           transition: all 0.3s ease;
+          box-shadow: var(--shadow-sm);
         }
 
+
+
         .action-btn:hover {
-          background: rgba(255, 255, 255, 0.1);
+          background: var(--bg-main);
           border-color: var(--primary);
         }
 
