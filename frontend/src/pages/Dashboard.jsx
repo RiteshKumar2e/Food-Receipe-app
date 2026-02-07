@@ -56,7 +56,7 @@ const Dashboard = () => {
                     <div className="profile-mini-column">
                         <div className="profile-card-mini">
                             <div className="pfp-placeholder">
-                                {user.name.charAt(0)}
+                                {user?.name?.[0] || 'U'}
                             </div>
                             <div className="profile-details-mini">
                                 <h4>{user.name}</h4>

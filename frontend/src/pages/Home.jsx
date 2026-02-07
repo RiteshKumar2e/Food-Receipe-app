@@ -47,7 +47,7 @@ const Home = () => {
                             transition={{ delay: 0.5 }}
                             style={{ display: 'flex', gap: '1.5rem', justifyContent: 'center' }}
                         >
-                            <Link to="/register" className="auth-btn" style={{ textDecoration: 'none', padding: '1.2rem 2.5rem' }}>
+                            <Link to="/dashboard" className="auth-btn" style={{ textDecoration: 'none', padding: '1.2rem 2.5rem' }}>
                                 Get Started Free
                             </Link>
                             <Link to="/login" className="view-all-btn" style={{ textDecoration: 'none' }}>

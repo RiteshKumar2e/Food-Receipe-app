@@ -26,7 +26,7 @@ const Profile = () => {
                     <div style={{ display: 'grid', gridTemplateColumns: '200px 1fr', gap: '3rem', alignItems: 'start' }}>
                         <div style={{ textAlign: 'center' }}>
                             <div className="pfp-placeholder" style={{ width: '150px', height: '150px', fontSize: '4rem' }}>
-                                {user.name.charAt(0)}
+                                {user?.name?.[0] || 'U'}
                             </div>
                             <button className="view-all-btn" style={{ fontSize: '0.8rem', width: '100%', marginTop: '1rem' }}>Change Photo</button>
                         </div>
