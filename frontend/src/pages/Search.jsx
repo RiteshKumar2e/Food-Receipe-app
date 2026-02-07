@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Filter, SlidersHorizontal, Loader2 } from 'lucide-react';
+import '../styles/Search.css';
 
 const SearchResults = () => {
     const [searchParams] = useSearchParams();
@@ -86,80 +87,6 @@ const SearchResults = () => {
                     <p>Try different keywords or browse our categories.</p>
                 </div>
             )}
-
-            <style jsx>{`
-        .search-header {
-          display: flex;
-          justify-content: space-between;
-          align-items: flex-end;
-          margin-bottom: 3rem;
-          padding-top: 2rem;
-        }
-
-        .search-meta h1 {
-          font-size: 2.5rem;
-          margin-bottom: 0.5rem;
-        }
-
-        .search-meta p {
-          color: var(--text-muted);
-        }
-
-        .search-actions {
-          display: flex;
-          gap: 1rem;
-        }
-
-        .action-btn {
-          background: white;
-          border: 1px solid var(--glass-border);
-          color: var(--text-main);
-          padding: 0.75rem 1.5rem;
-          border-radius: 12px;
-          display: flex;
-          align-items: center;
-          gap: 0.5rem;
-          cursor: pointer;
-          transition: all 0.3s ease;
-          box-shadow: var(--shadow-sm);
-        }
-
-
-
-        .action-btn:hover {
-          background: var(--bg-main);
-          border-color: var(--primary);
-        }
-
-        .loader-container {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          min-height: 400px;
-          gap: 1rem;
-          color: var(--text-muted);
-        }
-
-        @keyframes spin {
-          from { transform: rotate(0deg); }
-          to { transform: rotate(360deg); }
-        }
-
-        .animate-spin {
-          animation: spin 1s linear infinite;
-        }
-
-        .no-results {
-          text-align: center;
-          padding: 5rem 2rem;
-        }
-
-        .no-results h3 {
-          font-size: 1.8rem;
-          margin-bottom: 1rem;
-        }
-      `}</style>
         </div>
     );
 };

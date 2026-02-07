@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ChevronLeft, Clock, Users, PlayCircle, Globe, ListChecks } from 'lucide-react';
+import { ChevronLeft, PlayCircle, Globe, ListChecks } from 'lucide-react';
+import '../styles/Recipe.css';
 
 const RecipeDetail = () => {
   const { id } = useParams();
@@ -39,8 +40,18 @@ const RecipeDetail = () => {
     return ingredients;
   };
 
-  if (loading) return <div className="loader">Loading...</div>;
-  if (!recipe) return <div className="error">Recipe not found</div>;
+  if (loading) return (
+    <div className="page-content" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '60vh' }}>
+      <div style={{ fontSize: '1.5rem', color: 'var(--text-muted)' }}>Loading...</div>
+    </div>
+  );
+
+  if (!recipe) return (
+    <div className="page-content" style={{ textAlign: 'center', padding: '5rem' }}>
+      <h2>Recipe not found</h2>
+      <button onClick={() => navigate('/')} className="back-btn" style={{ margin: '2rem auto' }}>Return Home</button>
+    </div>
+  );
 
   return (
     <div className="page-content">
@@ -111,123 +122,6 @@ const RecipeDetail = () => {
           </div>
         </motion.div>
       </div>
-
-      <style jsx>{`
-        .back-btn {
-          background: transparent;
-          border: none;
-          color: var(--text-muted);
-          display: flex;
-          align-items: center;
-          gap: 0.5rem;
-          cursor: pointer;
-          margin-bottom: 2rem;
-          font-weight: 500;
-          transition: color 0.3s;
-        }
-
-        .back-btn:hover {
-          color: var(--primary);
-        }
-
-        .recipe-detail-grid {
-          display: grid;
-          grid-template-columns: 1fr 1.2fr;
-          gap: 4rem;
-          max-width: 1400px;
-          margin: 0 auto;
-        }
-
-        .main-image {
-          width: 100%;
-          border-radius: 2rem;
-          box-shadow: var(--shadow-md);
-          margin-bottom: 2rem;
-        }
-
-        .quick-info {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 1.5rem;
-        }
-
-        .info-item {
-          background: white;
-          padding: 0.75rem 1.5rem;
-          border-radius: 1rem;
-          display: flex;
-          align-items: center;
-          gap: 0.75rem;
-          font-size: 0.9rem;
-          border: 1px solid var(--glass-border);
-          box-shadow: var(--shadow-sm);
-        }
-
-        .info-item.youtube {
-          color: var(--primary);
-          text-decoration: none;
-          border-color: var(--primary);
-        }
-
-        .recipe-title-main {
-          font-size: 3.5rem;
-          font-weight: 800;
-          margin-bottom: 0.5rem;
-          line-height: 1.1;
-        }
-
-        .tags {
-          color: var(--primary);
-          font-weight: 600;
-          text-transform: uppercase;
-          font-size: 0.8rem;
-          letter-spacing: 1px;
-          margin-bottom: 3rem;
-        }
-
-        .ingredients-section h3, .instructions-section h3 {
-          font-size: 1.8rem;
-          margin-bottom: 1.5rem;
-          border-left: 4px solid var(--primary);
-          padding-left: 1rem;
-        }
-
-        .ingredients-list {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 1rem;
-          margin-bottom: 4rem;
-        }
-
-        .ingredient-item {
-          padding: 1rem;
-          background: white;
-          border: 1px solid var(--glass-border);
-          border-radius: 0.75rem;
-          display: flex;
-          gap: 0.5rem;
-          font-size: 0.95rem;
-          box-shadow: var(--shadow-sm);
-        }
-
-        .ing-measure {
-          color: var(--primary);
-          font-weight: 700;
-        }
-
-        .instructions-text p {
-          color: var(--text-muted);
-          line-height: 1.8;
-          margin-bottom: 1.5rem;
-          font-size: 1.1rem;
-        }
-
-        @media (max-width: 1024px) {
-          .recipe-detail-grid {
-            grid-template-columns: 1fr;
-          }
-        }
-      `}</style>
     </div>
   );
 };

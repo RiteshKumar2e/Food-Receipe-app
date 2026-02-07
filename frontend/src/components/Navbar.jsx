@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Search, ChefHat, Heart, User } from 'lucide-react';
+import { Search, ChefHat, User } from 'lucide-react';
+import '../styles/Navbar.css';
 
 const Navbar = () => {
     const navigate = useNavigate();
-    const [query, setQuery] = React.useState('');
+    const [query, setQuery] = useState('');
 
     const handleSubmit = (e) => {
         e.preventDefault();

@@ -3,7 +3,7 @@ import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import SearchResults from './pages/Search';
 import RecipeDetail from './pages/Recipe';
-import './App.css';
+import './styles/Global.css';
 
 function App() {
   return (

@@ -1,0 +1,125 @@
+.back-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    margin-bottom: 2rem;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.back-btn:hover {
+    color: var(--primary);
+    transform: translateX(-5px);
+}
+
+.recipe-detail-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 4rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.main-image {
+    width: 100%;
+    border-radius: 2rem;
+    box-shadow: var(--shadow-md);
+    margin-bottom: 2rem;
+}
+
+.quick-info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+}
+
+.info-item {
+    background: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.95rem;
+    font-weight: 500;
+    border: 1px solid var(--glass-border);
+    box-shadow: var(--shadow-sm);
+}
+
+.info-item.youtube {
+    color: #ff0000;
+    text-decoration: none;
+    border-color: rgba(255, 0, 0, 0.2);
+}
+
+.info-item.youtube:hover {
+    background: #fff5f5;
+    border-color: #ff0000;
+}
+
+.recipe-title-main {
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+    line-height: 1.1;
+    color: var(--text-main);
+}
+
+.tags {
+    color: var(--primary);
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 1.5px;
+    margin-bottom: 3rem;
+}
+
+.ingredients-section h3,
+.instructions-section h3 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    border-left: 5px solid var(--primary);
+    padding-left: 1.2rem;
+    color: var(--text-main);
+}
+
+.ingredients-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.2rem;
+    margin-bottom: 4rem;
+}
+
+.ingredient-item {
+    padding: 1rem;
+    background: white;
+    border: 1px solid var(--glass-border);
+    border-radius: 0.75rem;
+    display: flex;
+    gap: 0.6rem;
+    font-size: 1rem;
+    box-shadow: var(--shadow-sm);
+}
+
+.ing-measure {
+    color: var(--primary);
+    font-weight: 700;
+}
+
+.instructions-text p {
+    color: var(--text-muted);
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
+}
+
+@media (max-width: 1024px) {
+    .recipe-detail-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+}
