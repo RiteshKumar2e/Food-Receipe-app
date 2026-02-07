@@ -64,7 +64,7 @@ const Register = () => {
                     </div>
                     <div className="form-group">
                         <label>Password</label>
-                        <input name="password" type="password" placeholder="••••••••" required onChange={handleChange} />
+                        <input name="password" type="password" placeholder="••••••••" required autoComplete="new-password" onChange={handleChange} />
                     </div>
                     <button type="submit" className="auth-btn">Create Account</button>
                 </form>
