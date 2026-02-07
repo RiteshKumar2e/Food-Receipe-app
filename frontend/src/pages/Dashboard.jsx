@@ -26,9 +26,6 @@ const Dashboard = () => {
                         <h1>Hi, {user.name}! 👋</h1>
                         <p>Welcome to your personal culinary dashboard.</p>
                     </div>
-                    <button className="view-all-btn" style={{ background: '#ff6f61', color: 'white', borderColor: '#ff6f61' }} onClick={logout}>
-                        <LogOut size={18} /> Logout
-                    </button>
                 </header>
 
                 <section className="search-widget">

@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { Search, ChefHat, User, Globe, ChevronDown, UserPlus, LogIn, LayoutDashboard, Menu, X, Home as HomeIcon } from 'lucide-react';
+import { Search, ChefHat, User, Globe, ChevronDown, UserPlus, LogIn, LayoutDashboard, Menu, X, Home as HomeIcon, LogOut } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import '../styles/Navbar.css';
 
 const Navbar = () => {
     const navigate = useNavigate();
     const location = useLocation();
-    const { user, token } = useAuth();
+    const { user, token, logout } = useAuth();
     const [query, setQuery] = useState('');
     const [showCountry, setShowCountry] = useState(false);
 
@@ -34,7 +34,7 @@ const Navbar = () => {
         setShowCountry(false);
     };
 
-    // Landing Page Navbar (Restored to previous version with sections)
+    // Landing Page Navbar
     if (isLandingPage) {
         return (
             <nav className="navbar landing-nav">
@@ -68,7 +68,7 @@ const Navbar = () => {
         );
     }
 
-    // App / Dashboard / Search / Recipe Navbar (Minimalist version for internal pages)
+    // App / Dashboard / Search / Recipe Navbar
     return (
         <nav className="navbar app-minimal-nav">
             <div className="nav-container">
@@ -78,10 +78,10 @@ const Navbar = () => {
                 </Link>
 
                 <div className="nav-links">
-                    <Link to="/" className="nav-link back-home-btn">
-                        <HomeIcon size={18} />
-                        Back to Home
-                    </Link>
+                    <button onClick={logout} className="nav-link logout-nav-btn">
+                        <LogOut size={18} />
+                        Logout
+                    </button>
                 </div>
             </div>
         </nav>

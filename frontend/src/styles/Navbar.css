@@ -97,20 +97,26 @@
 }
 
 /* Minimalist Back Button for internal pages */
-.back-home-btn {
+.logout-nav-btn {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    padding: 0.6rem 1.2rem;
-    background: var(--bg-main);
-    border: 1px solid var(--glass-border);
+    padding: 0.6rem 1.4rem;
+    background: #ff6f61;
+    color: white !important;
+    border: none;
     border-radius: 50px;
-    box-shadow: var(--shadow-sm);
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 700;
+    transition: var(--transition);
+    box-shadow: 0 4px 15px rgba(255, 111, 97, 0.2);
 }
 
-.back-home-btn:hover {
-    background: white;
-    border-color: var(--primary);
+.logout-nav-btn:hover {
+    background: #e65b50;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 111, 97, 0.3);
 }
 
 @media (max-width: 992px) {
