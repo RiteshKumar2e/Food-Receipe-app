@@ -5,7 +5,7 @@ import '../styles/Auth.css';
 
 const Login = () => {
     const [formData, setFormData] = useState({
-        email: '',
+        identifier: '',
         password: '',
     });
     const [error, setError] = useState('');
@@ -49,12 +49,24 @@ const Login = () => {
 
                 <form className="auth-form" onSubmit={handleSubmit}>
                     <div className="form-group">
-                        <label>Email Address</label>
-                        <input name="email" type="email" placeholder="john@example.com" required onChange={handleChange} />
+                        <label>Email or Phone Number</label>
+                        <input
+                            name="identifier"
+                            type="text"
+                            placeholder="Email or +91..."
+                            required
+                            onChange={handleChange}
+                        />
                     </div>
                     <div className="form-group">
                         <label>Password</label>
-                        <input name="password" type="password" placeholder="••••••••" required onChange={handleChange} />
+                        <input
+                            name="password"
+                            type="password"
+                            placeholder="••••••••"
+                            required
+                            onChange={handleChange}
+                        />
                     </div>
                     <button type="submit" className="auth-btn">Log In</button>
                 </form>

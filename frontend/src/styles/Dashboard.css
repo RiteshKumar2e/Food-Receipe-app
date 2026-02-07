@@ -1,5 +1,4 @@
 .dashboard-page {
-    padding-top: var(--nav-height);
     min-height: 100vh;
     background: var(--bg-main);
 }

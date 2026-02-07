@@ -46,9 +46,9 @@ app.post('/api/auth/register', async (req, res) => {
 });
 
 app.post('/api/auth/login', async (req, res) => {
-    const { email, password } = req.body;
+    const { identifier, password } = req.body; // identifier can be email or phone
     const users = readUsers();
-    const user = users.find(u => u.email === email);
+    const user = users.find(u => u.email === identifier || u.phone === identifier);
 
     if (!user || !(await bcrypt.compare(password, user.password))) {
         return res.status(400).json({ message: "Invalid credentials" });

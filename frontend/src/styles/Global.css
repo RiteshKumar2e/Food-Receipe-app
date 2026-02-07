@@ -54,5 +54,6 @@ body {
 }
 
 .main-wrapper {
-    min-height: calc(100vh - var(--nav-height));
+    min-height: 100vh;
+    padding-top: var(--nav-height);
 }

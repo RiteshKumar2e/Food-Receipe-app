@@ -1,5 +1,5 @@
 .hero-landing {
-    height: 100vh;
+    height: calc(100vh - var(--nav-height));
     width: 100%;
     position: relative;
     background-image: url('/src/assets/food.jpg');
