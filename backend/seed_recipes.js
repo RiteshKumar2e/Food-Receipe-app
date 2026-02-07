@@ -32,16 +32,6 @@ const dishThemes = {
             'https://images.unsplash.com/photo-1585032226651-759b368d7246?w=800&q=80',
             'https://images.unsplash.com/photo-1525755662778-989d0524087e?w=800&q=80'
         ]
-    },
-    American: {
-        prefixes: ['Gourmet', 'Texas Style', 'BBQ', 'Double', 'Juicy', 'Ultimate'],
-        bases: ['Cheeseburger', 'Chicken Wings', 'Hot Dog', 'Steak', 'Mac and Cheese', 'Club Sandwich', 'Pulled Pork', 'Grilled Cheese', 'Potato Salad'],
-        suffixes: ['with Fries', 'Deluxe', 'Stack', 'Monster', 'Classic'],
-        images: [
-            'https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=800&q=80',
-            'https://images.unsplash.com/photo-1527477396000-e27163b481c2?w=800&q=80',
-            'https://images.unsplash.com/photo-1594212699903-ec8a3ecc50f6?w=800&q=80'
-        ]
     }
 };
 
@@ -87,4 +77,4 @@ function generateRecipes(count) {
 
 const data = generateRecipes(2500);
 fs.writeFileSync(path.join(__dirname, 'data', 'recipes.json'), JSON.stringify(data, null, 2));
-console.log('Generated 2500 recipes successfully!');
+console.log('Regenerated 2500 recipes for Indian, Chinese, and Italian only!');

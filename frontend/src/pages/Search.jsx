@@ -14,6 +14,8 @@ const SearchResults = () => {
     const [loading, setLoading] = useState(true);
     const [searchInput, setSearchInput] = useState(query);
 
+    const quickCuisines = ['Indian', 'Chinese', 'Italian'];
+
     useEffect(() => {
         const fetchRecipes = async () => {
             setLoading(true);
@@ -26,7 +28,14 @@ const SearchResults = () => {
                 }
                 const response = await fetch(url);
                 const data = await response.json();
-                setRecipes(data.meals || []);
+
+                // Filter to ensure only Indian, Chinese, Italian show up even from external API
+                const filtered = (data.meals || []).filter(r =>
+                    quickCuisines.includes(r.strArea) ||
+                    r.strArea === area // Keep the specifically searched area
+                );
+
+                setRecipes(filtered);
             } catch (error) {
                 console.error("Error fetching recipes:", error);
             } finally {
@@ -54,19 +63,22 @@ const SearchResults = () => {
                         <SearchIcon size={20} color="#ff6f61" />
                         <input
                             type="text"
-                            placeholder="Search for another dish..."
+                            placeholder="Search for 'Biryani', 'Noodles' or 'Pasta'..."
                             value={searchInput}
                             onChange={(e) => setSearchInput(e.target.value)}
                         />
                     </form>
 
                     <div className="search-filters-v2">
-                        <button className="filter-pill-v2 active">
-                            <Filter size={16} /> Filter
-                        </button>
-                        <button className="filter-pill-v2">Sort By</button>
-                        <button className="filter-pill-v2">Ratings 4.0+</button>
-                        <button className="filter-pill-v2">Veg only</button>
+                        {quickCuisines.map(c => (
+                            <button
+                                key={c}
+                                className={`filter-pill-v2 ${area === c ? 'active' : ''}`}
+                                onClick={() => navigate(`/search?area=${c}`)}
+                            >
+                                {c}
+                            </button>
+                        ))}
                     </div>
                 </div>
 
@@ -75,9 +87,9 @@ const SearchResults = () => {
                     <h1>
                         {area
                             ? `${area} Cuisine`
-                            : (query ? `Results for "${query}"` : 'Explore World Cuisine')}
+                            : (query ? `Results for "${query}"` : 'Explore Top Cuisines')}
                     </h1>
-                    <p>{recipes.length} dishes identified from around the world</p>
+                    <p>{recipes.length} authentic dishes found</p>
                 </div>
 
                 {/* Content Area */}
@@ -120,7 +132,7 @@ const SearchResults = () => {
                                             <span>{Math.floor(Math.random() * 30 + 15)} mins</span>
                                         </div>
                                     </div>
-                                    <p className="card-meta-v2">{recipe.strArea || 'International'} • {recipe.strCategory}</p>
+                                    <p className="card-meta-v2">{recipe.strArea} • {recipe.strCategory}</p>
                                 </div>
                             </motion.div>
                         ))}
@@ -131,7 +143,7 @@ const SearchResults = () => {
                     <div className="empty-search-v2">
                         <div className="empty-icon-v2">😕</div>
                         <h3>No dishes found for "{query}"</h3>
-                        <p>We couldn't find exactly what you're looking for. Try a different search terms or explore our top categories.</p>
+                        <p>We only serve the best of Indian, Chinese, and Italian right now. Try searching for something else!</p>
                         <button onClick={() => navigate('/dashboard')} className="cta-btn-v2">Back to Dashboard</button>
                     </div>
                 )}

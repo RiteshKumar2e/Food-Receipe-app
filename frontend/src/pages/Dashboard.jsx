@@ -10,20 +10,29 @@ const Dashboard = () => {
     const navigate = useNavigate();
     const [query, setQuery] = useState('');
 
-    const categories = [
-        { name: 'Biryani', icon: <Flame color="#ff6f61" />, color: '#fff5f4' },
-        { name: 'Pizza', icon: <Pizza color="#ffa000" />, color: '#fffaf0' },
-        { name: 'Burger', icon: <Utensils color="#4caf50" />, color: '#f1f8f1' },
-        { name: 'Pasta', icon: <Soup color="#2196f3" />, color: '#f0f7ff' },
-        { name: 'Desserts', icon: <Coffee color="#9c27b0" />, color: '#f9f0ff' },
-        { name: 'Healthy', icon: <Star color="#009688" />, color: '#f0f9f8' },
+    const cuisines = [
+        {
+            name: 'Indian',
+            image: 'https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=300&h=300&fit=crop',
+            color: '#ff6f61'
+        },
+        {
+            name: 'Chinese',
+            image: 'https://images.unsplash.com/photo-1585032226651-759b368d7246?w=300&h=300&fit=crop',
+            color: '#4caf50'
+        },
+        {
+            name: 'Italian',
+            image: 'https://images.unsplash.com/photo-1513104890138-7c749659a591?w=300&h=300&fit=crop',
+            color: '#ffa000'
+        },
     ];
 
     const collections = [
-        { title: "Trending This Week", count: "40+ Recipes", image: "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=500&q=80" },
-        { title: "Quick 15-Min Meals", count: "25+ Recipes", image: "https://images.unsplash.com/photo-1476824559427-0b8a50a1340b?w=500&q=80" },
-        { title: "Healthy Breakfasts", count: "15+ Recipes", image: "https://images.unsplash.com/photo-1494390248081-4e521a5940db?w=500&q=80" },
-        { title: "Authentic Indian", count: "100+ Recipes", image: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=500&q=80" },
+        { title: "Best of Indian Spice", count: "100+ Recipes", image: "https://images.unsplash.com/photo-1545231027-63b6f0a77ad1?w=800&q=80" },
+        { title: "Authentic Chinese Wok", count: "80+ Recipes", image: "https://images.unsplash.com/photo-1512003867696-6d5ce11b7740?w=800&q=80" },
+        { title: "Classic Italian Pastas", count: "60+ Recipes", image: "https://images.unsplash.com/photo-1473093226795-af9932fe5856?w=800&q=80" },
+        { title: "North Indian Delights", count: "40+ Recipes", image: "https://images.unsplash.com/photo-1631515243349-e0cb75fb8d3a?w=800&q=80" },
     ];
 
     const handleSearch = (e) => {
@@ -45,8 +54,8 @@ const Dashboard = () => {
                         animate={{ opacity: 1, x: 0 }}
                         className="welcome-text-v2"
                     >
-                        <h1>Inspiration for your next meal, {user.name.split(' ')[0]}</h1>
-                        <p>Discover recipes, plan your week, and cook like a pro.</p>
+                        <h1>Focusing on your favorites, {user.name.split(' ')[0]}</h1>
+                        <p>Explore the best of Indian, Chinese, and Italian cuisines.</p>
                     </motion.div>
                 </header>
 
@@ -56,7 +65,7 @@ const Dashboard = () => {
                         <Search size={22} className="search-icon-fixed" />
                         <input
                             type="text"
-                            placeholder="Search for 'Pasta', 'Chicken Biryani' or 'Healthy'..."
+                            placeholder="Search for 'Biryani', 'Noodles' or 'Pizza'..."
                             value={query}
                             onChange={(e) => setQuery(e.target.value)}
                         />
@@ -64,22 +73,21 @@ const Dashboard = () => {
                     </form>
                 </div>
 
-                {/* Quick Categories */}
+                {/* Quick Cuisines - Zomato Style Circles */}
                 <section className="categories-section">
                     <div className="section-header">
-                        <h2>What's on your mind?</h2>
+                        <h2>Inspiration for your next order</h2>
                     </div>
-                    <div className="categories-grid-v2">
-                        {categories.map((cat, idx) => (
+                    <div className="cuisines-circles-grid">
+                        {cuisines.map((cat, idx) => (
                             <motion.div
                                 key={idx}
                                 whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.95 }}
-                                className="category-item-v2"
-                                onClick={() => navigate(`/search?q=${cat.name}`)}
+                                className="cuisine-circle-item"
+                                onClick={() => navigate(`/search?area=${cat.name}`)}
                             >
-                                <div className="category-icon-wrapper" style={{ backgroundColor: cat.color }}>
-                                    {cat.icon}
+                                <div className="circle-image-wrapper">
+                                    <img src={cat.image} alt={cat.name} />
                                 </div>
                                 <span>{cat.name}</span>
                             </motion.div>
@@ -111,7 +119,7 @@ const Dashboard = () => {
                     </div>
                 </section>
 
-                {/* Recent & Profile Row */}
+                {/* Info Row */}
                 <div className="dashboard-info-row">
                     <div className="activity-card-v2">
                         <div className="card-header-v2">

@@ -101,39 +101,47 @@
     font-weight: 700;
 }
 
-.categories-grid-v2 {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-    gap: 1.5rem;
+.cuisines-circles-grid {
+    display: flex;
+    gap: 3rem;
+    overflow-x: auto;
+    padding: 1rem 0;
+    scrollbar-width: none;
 }
 
-.category-item-v2 {
+.cuisine-circle-item {
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 1rem;
     cursor: pointer;
+    min-width: 150px;
 }
 
-.category-icon-wrapper {
-    width: 100px;
-    height: 100px;
+.circle-image-wrapper {
+    width: 150px;
+    height: 150px;
     border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 0.8rem;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    background: #f0f0f0;
+}
+
+.circle-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
     transition: transform 0.3s ease;
 }
 
-.category-icon-wrapper svg {
-    width: 40px;
-    height: 40px;
+.cuisine-circle-item:hover .circle-image-wrapper img {
+    transform: scale(1.1);
 }
 
-.category-item-v2 span {
+.cuisine-circle-item span {
+    font-size: 1.1rem;
     font-weight: 600;
-    color: #4f4f4f;
-    font-size: 1rem;
+    color: #1c1c1c;
 }
 
 /* Collections Cards */
