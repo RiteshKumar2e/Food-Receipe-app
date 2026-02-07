@@ -189,3 +189,29 @@
     align-items: center;
     gap: 0.5rem;
 }
+
+/* Landing Specific Navbar */
+.landing-nav .nav-container {
+    justify-content: space-between;
+}
+
+.landing-links {
+    margin-left: auto;
+    margin-right: 3rem;
+    display: flex;
+    gap: 2rem;
+}
+
+.nav-auth {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.dashboard-shortcut {
+    color: var(--primary) !important;
+    font-weight: 700 !important;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
