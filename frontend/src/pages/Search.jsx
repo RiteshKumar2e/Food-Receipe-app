@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Filter, SlidersHorizontal, Loader2, Star, Clock, Heart, Search as SearchIcon } from 'lucide-react';
+import { Filter, SlidersHorizontal, Loader2, Star, Clock, Heart, Search as SearchIcon, Leaf } from 'lucide-react';
 import '../styles/Search.css';
 
 const SearchResults = () => {
@@ -13,6 +13,8 @@ const SearchResults = () => {
     const [recipes, setRecipes] = useState([]);
     const [loading, setLoading] = useState(true);
     const [searchInput, setSearchInput] = useState(query);
+    const [vegOnly, setVegOnly] = useState(false);
+    const [nonVegOnly, setNonVegOnly] = useState(false);
 
     const quickCuisines = ['Indian', 'Chinese', 'Italian'];
 
@@ -47,11 +49,27 @@ const SearchResults = () => {
         setSearchInput(query);
     }, [query, area]);
 
+    const filteredRecipes = useMemo(() => {
+        if (vegOnly) return recipes.filter(r => r.strVeg === 'Yes');
+        if (nonVegOnly) return recipes.filter(r => r.strVeg === 'No');
+        return recipes;
+    }, [recipes, vegOnly, nonVegOnly]);
+
     const handleSearchSubmit = (e) => {
         e.preventDefault();
         if (searchInput.trim()) {
             navigate(`/search?q=${searchInput}`);
         }
+    };
+
+    const toggleVeg = () => {
+        setVegOnly(!vegOnly);
+        setNonVegOnly(false);
+    };
+
+    const toggleNonVeg = () => {
+        setNonVegOnly(!nonVegOnly);
+        setVegOnly(false);
     };
 
     return (
@@ -80,6 +98,17 @@ const SearchResults = () => {
                             </button>
                         ))}
                     </div>
+
+                    <div className="dietary-filters-v2">
+                        <div className={`diet-toggle-v2 ${vegOnly ? 'veg' : ''}`} onClick={toggleVeg}>
+                            <div className="diet-indicator veg"></div>
+                            <span>Veg Only</span>
+                        </div>
+                        <div className={`diet-toggle-v2 ${nonVegOnly ? 'non-veg' : ''}`} onClick={toggleNonVeg}>
+                            <div className="diet-indicator non-veg"></div>
+                            <span>Non-Veg Only</span>
+                        </div>
+                    </div>
                 </div>
 
                 {/* Header Section */}
@@ -89,7 +118,7 @@ const SearchResults = () => {
                             ? `${area} Cuisine`
                             : (query ? `Results for "${query}"` : 'Explore Top Cuisines')}
                     </h1>
-                    <p>{recipes.length} authentic dishes found</p>
+                    <p>{filteredRecipes.length} authentic dishes found</p>
                 </div>
 
                 {/* Content Area */}
@@ -100,7 +129,7 @@ const SearchResults = () => {
                     </div>
                 ) : (
                     <div className="recipes-grid-v2">
-                        {recipes.map((recipe, index) => (
+                        {filteredRecipes.map((recipe, index) => (
                             <motion.div
                                 key={recipe.idMeal}
                                 className="recipe-card-v2"
@@ -117,6 +146,9 @@ const SearchResults = () => {
                                             <Heart size={18} />
                                         </button>
                                     </div>
+                                    <div className={`diet-icon-card-v2 ${recipe.strVeg === 'Yes' ? 'veg' : 'non-veg'}`}>
+                                        <div className="dot"></div>
+                                    </div>
                                     <div className="promo-tag-v2">Top Rated</div>
                                 </div>
                                 <div className="card-body-v2">
@@ -124,12 +156,12 @@ const SearchResults = () => {
                                     <div className="card-stats-row-v2">
                                         <div className="rating-pill-v2">
                                             <Star size={14} fill="currentColor" />
-                                            <span>{(4 + Math.random()).toFixed(1)}</span>
+                                            <span>{(4.1 + (recipe.idMeal.slice(-1) / 10)).toFixed(1)}</span>
                                         </div>
                                         <span className="dot-separator">•</span>
                                         <div className="time-stat-v2">
                                             <Clock size={14} />
-                                            <span>{Math.floor(Math.random() * 30 + 15)} mins</span>
+                                            <span>{20 + (parseInt(recipe.idMeal.slice(-2)) % 40)} mins</span>
                                         </div>
                                     </div>
                                     <p className="card-meta-v2">{recipe.strArea} • {recipe.strCategory}</p>
@@ -139,12 +171,12 @@ const SearchResults = () => {
                     </div>
                 )}
 
-                {(!loading && recipes.length === 0) && (
+                {(!loading && filteredRecipes.length === 0) && (
                     <div className="empty-search-v2">
                         <div className="empty-icon-v2">😕</div>
-                        <h3>No dishes found for "{query}"</h3>
-                        <p>We only serve the best of Indian, Chinese, and Italian right now. Try searching for something else!</p>
-                        <button onClick={() => navigate('/dashboard')} className="cta-btn-v2">Back to Dashboard</button>
+                        <h3>No dishes found for your request</h3>
+                        <p>Try switching between Veg and Non-Veg or explore a different cuisine.</p>
+                        <button onClick={() => { setVegOnly(false); setNonVegOnly(false); }} className="cta-btn-v2">Reset Filters</button>
                     </div>
                 )}
             </div>

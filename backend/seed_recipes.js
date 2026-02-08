@@ -4,14 +4,48 @@ const path = require('path');
 const dishData = {
     Indian: {
         dishes: [
-            'Chicken Biryani', 'Mutton Biryani', 'Paneer Butter Masala', 'Chole Bhature', 'Dal Makhani',
-            'Tandoori Chicken', 'Masala Dosa', 'Palak Paneer', 'Chicken Tikka Masala', 'Butter Chicken',
-            'Rogan Josh', 'Aloo Gobi', 'Malai Kofta', 'Hyderabadi Biryani', 'Lamb Vindaloo',
-            'Prawn Moilee', 'Fish Curry', 'Vegetable Korma', 'Baingan Bharta', 'Gulab Jamun',
-            'Rasmalai', 'Pav Bhaji', 'Dhokla', 'Vada Pav', 'Idli Sambhar', 'Chicken Chettinad',
-            'Goan Fish Curry', 'Kadhai Paneer', 'Matar Paneer', 'Aloo Paratha', 'Gajar Ka Halwa',
-            'Lassi', 'Samosa Chat', 'Chicken 65', 'Keema Matar', 'Dum Aloo', 'Boti Kabab',
-            'Seekh Kabab', 'Reshmi Kabab', 'Tandoori Roti', 'Garlic Naan', 'Rumali Roti'
+            { name: 'Chicken Biryani', veg: false },
+            { name: 'Mutton Biryani', veg: false },
+            { name: 'Paneer Butter Masala', veg: true },
+            { name: 'Chole Bhature', veg: true },
+            { name: 'Dal Makhani', veg: true },
+            { name: 'Tandoori Chicken', veg: false },
+            { name: 'Masala Dosa', veg: true },
+            { name: 'Palak Paneer', veg: true },
+            { name: 'Chicken Tikka Masala', veg: false },
+            { name: 'Butter Chicken', veg: false },
+            { name: 'Rogan Josh', veg: false },
+            { name: 'Aloo Gobi', veg: true },
+            { name: 'Malai Kofta', veg: true },
+            { name: 'Hyderabadi Biryani', veg: false },
+            { name: 'Lamb Vindaloo', veg: false },
+            { name: 'Prawn Moilee', veg: false },
+            { name: 'Fish Curry', veg: false },
+            { name: 'Vegetable Korma', veg: true },
+            { name: 'Baingan Bharta', veg: true },
+            { name: 'Gulab Jamun', veg: true },
+            { name: 'Rasmalai', veg: true },
+            { name: 'Pav Bhaji', veg: true },
+            { name: 'Dhokla', veg: true },
+            { name: 'Vada Pav', veg: true },
+            { name: 'Idli Sambhar', veg: true },
+            { name: 'Chicken Chettinad', veg: false },
+            { name: 'Goan Fish Curry', veg: false },
+            { name: 'Kadhai Paneer', veg: true },
+            { name: 'Matar Paneer', veg: true },
+            { name: 'Aloo Paratha', veg: true },
+            { name: 'Gajar Ka Halwa', veg: true },
+            { name: 'Lassi', veg: true },
+            { name: 'Samosa Chat', veg: true },
+            { name: 'Chicken 65', veg: false },
+            { name: 'Keema Matar', veg: false },
+            { name: 'Dum Aloo', veg: true },
+            { name: 'Boti Kabab', veg: false },
+            { name: 'Seekh Kabab', veg: false },
+            { name: 'Reshmi Kabab', veg: false },
+            { name: 'Tandoori Roti', veg: true },
+            { name: 'Garlic Naan', veg: true },
+            { name: 'Rumali Roti', veg: true }
         ],
         prefixes: ['Authentic', 'Royal', 'Spicy', 'Old Delhi Style', 'Lakeside', 'Gramin', 'Gourmet', 'Chef Special', 'Traditional'],
         images: [
@@ -27,12 +61,37 @@ const dishData = {
     },
     Chinese: {
         dishes: [
-            'Kung Pao Chicken', 'Sweet and Sour Pork', 'Dim Sum Platter', 'Szechuan Noodles', 'Wonton Soup',
-            'Peking Duck', 'Hakka Noodles', 'Spring Rolls', 'Mapo Tofu', 'Fried Rice', 'Manchurian',
-            'Hot and Sour Soup', 'General Tsos Chicken', 'Egg Drop Soup', 'Chow Mein', 'Lo Mein',
-            'Cantonese Steamed Fish', 'Honey Walnut Shrimp', 'Ma Po Tahu', 'Zha Jiang Mian', 'Dan Dan Noodles',
-            'Fortune Cookies', 'Mooncakes', 'Crispy Chilli Beef', 'Salt and Pepper Squid', 'Bao Buns',
-            'Schezwan Fried Rice', 'Dimsum Har Gow', 'Siew Mai', 'Potstickers', 'Scallop Dumplings'
+            { name: 'Kung Pao Chicken', veg: false },
+            { name: 'Sweet and Sour Pork', veg: false },
+            { name: 'Dim Sum Platter', veg: true },
+            { name: 'Szechuan Noodles', veg: true },
+            { name: 'Wonton Soup', veg: false },
+            { name: 'Peking Duck', veg: false },
+            { name: 'Hakka Noodles', veg: true },
+            { name: 'Spring Rolls', veg: true },
+            { name: 'Mapo Tofu', veg: true },
+            { name: 'Fried Rice', veg: true },
+            { name: 'Manchurian', veg: true },
+            { name: 'Hot and Sour Soup', veg: true },
+            { name: 'General Tsos Chicken', veg: false },
+            { name: 'Egg Drop Soup', veg: false },
+            { name: 'Chow Mein', veg: true },
+            { name: 'Lo Mein', veg: true },
+            { name: 'Cantonese Steamed Fish', veg: false },
+            { name: 'Honey Walnut Shrimp', veg: false },
+            { name: 'Ma Po Tahu', veg: true },
+            { name: 'Zha Jiang Mian', veg: false },
+            { name: 'Dan Dan Noodles', veg: false },
+            { name: 'Fortune Cookies', veg: true },
+            { name: 'Mooncakes', veg: true },
+            { name: 'Crispy Chilli Beef', veg: false },
+            { name: 'Salt and Pepper Squid', veg: false },
+            { name: 'Bao Buns', veg: true },
+            { name: 'Schezwan Fried Rice', veg: true },
+            { name: 'Dimsum Har Gow', veg: false },
+            { name: 'Siew Mai', veg: false },
+            { name: 'Potstickers', veg: true },
+            { name: 'Scallop Dumplings', veg: false }
         ],
         prefixes: ['Hong Kong Style', 'Golden', 'Imperial', 'Mainland', 'Wok-Tossed', 'Spicy', 'Crunchy', 'Heritage'],
         images: [
@@ -46,12 +105,34 @@ const dishData = {
     },
     Italian: {
         dishes: [
-            'Margherita Pizza', 'Carbonara Pasta', 'Lasagna Bolognese', 'Risotto ai Funghi', 'Tiramisu',
-            'Bruschetta Classica', 'Spaghetti Aglio e Olio', 'Fettuccine Alfredo', 'Gnocchi di Patate',
-            'Ravioli Spinach and Ricotta', 'Pesto Genovese', 'Osso Buco', 'Minestrone Soup', 'Focaccia Bread',
-            'Caprese Salad', 'Panna Cotta', 'Calzone Napoletano', 'Penne Arrabbiata', 'Seafood Linguine',
-            'Eggplant Parmigiana', 'Chicken Marsala', 'Veal Saltimbocca', 'Arancini', 'Panettone',
-            'Cannoli', 'Prosciutto e Melone', 'Polenta with Sausage', 'Zuppa Toscana'
+            { name: 'Margherita Pizza', veg: true },
+            { name: 'Carbonara Pasta', veg: false },
+            { name: 'Lasagna Bolognese', veg: false },
+            { name: 'Risotto ai Funghi', veg: true },
+            { name: 'Tiramisu', veg: true },
+            { name: 'Bruschetta Classica', veg: true },
+            { name: 'Spaghetti Aglio e Olio', veg: true },
+            { name: 'Fettuccine Alfredo', veg: true },
+            { name: 'Gnocchi di Patate', veg: true },
+            { name: 'Ravioli Spinach and Ricotta', veg: true },
+            { name: 'Pesto Genovese', veg: true },
+            { name: 'Osso Buco', veg: false },
+            { name: 'Minestrone Soup', veg: true },
+            { name: 'Focaccia Bread', veg: true },
+            { name: 'Caprese Salad', veg: true },
+            { name: 'Panna Cotta', veg: true },
+            { name: 'Calzone Napoletano', veg: false },
+            { name: 'Penne Arrabbiata', veg: true },
+            { name: 'Seafood Linguine', veg: false },
+            { name: 'Eggplant Parmigiana', veg: true },
+            { name: 'Chicken Marsala', veg: false },
+            { name: 'Veal Saltimbocca', veg: false },
+            { name: 'Arancini', veg: true },
+            { name: 'Panettone', veg: true },
+            { name: 'Cannoli', veg: true },
+            { name: 'Prosciutto e Melone', veg: false },
+            { name: 'Polenta with Sausage', veg: false },
+            { name: 'Zuppa Toscana', veg: false }
         ],
         prefixes: ['Tuscan', 'Sicilian', 'Homemade', 'Artisan', 'Zesty', 'Rustic', 'Modern', 'Handcrafted'],
         images: [
@@ -80,12 +161,12 @@ function generateRecipes(count) {
         const cuisine = cuisines[Math.floor(Math.random() * cuisines.length)];
         const data = dishData[cuisine];
 
-        const baseDish = data.dishes[Math.floor(Math.random() * data.dishes.length)];
+        const baseObj = data.dishes[Math.floor(Math.random() * data.dishes.length)];
         const prefix = data.prefixes[Math.floor(Math.random() * data.prefixes.length)];
         const image = data.images[Math.floor(Math.random() * data.images.length)];
         const instruction = instructionsTemplates[Math.floor(Math.random() * instructionsTemplates.length)];
 
-        const mealName = Math.random() > 0.3 ? `${prefix} ${baseDish}` : baseDish;
+        const mealName = Math.random() > 0.3 ? `${prefix} ${baseObj.name}` : baseObj.name;
 
         const recipe = {
             idMeal: (20000 + i).toString(),
@@ -95,7 +176,8 @@ function generateRecipes(count) {
             strInstructions: instruction,
             strMealThumb: image,
             strTags: `${cuisine},RealFood,Premium`,
-            strYoutube: "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+            strYoutube: "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+            strVeg: baseObj.veg ? 'Yes' : 'No'
         };
 
         // Proper ingredients
@@ -119,4 +201,4 @@ if (!fs.existsSync(path.join(__dirname, 'data'))) {
 }
 
 fs.writeFileSync(filePath, JSON.stringify(finalData, null, 2));
-console.log('Successfully generated 2500+ REAL-STYLE recipes for Indian, Chinese, and Italian cuisines!');
+console.log('Successfully generated 2500+ REAL-STYLE recipes with Veg/Non-Veg marking!');
